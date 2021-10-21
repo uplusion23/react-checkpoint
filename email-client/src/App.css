@@ -1,0 +1,285 @@
+:root {
+  --background-darker: 13, 13, 19;
+  --background-dark: 35, 35, 40;
+  --background-medium: 18, 20, 22;
+  
+  --color-primary: 235, 235, 242;
+  --color-accent: 75, 115, 239; /* Blue Accent */
+  
+  --border-radius: 20px;
+}
+
+::-webkit-scrollbar {
+  background: transparent;
+  width: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(var(--color-primary), 0.7);
+  border-radius: 2px;
+}
+
+html, body {
+  display: block;
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+body {
+}
+
+body .App {
+  display: grid;
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  color: rgb(var(--color-primary));
+  background-color: rgb(var(--background-darker));
+  font-family: 'Arial', sans-serif;
+  grid-template-columns: 600px 1fr;
+}
+
+.App > .navigation {
+  display: flex;
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  background: rgb(var(--background-dark));
+  flex-direction: column;
+  transition: all 0.2s ease;
+  z-index: 90;
+}
+
+.App > .navigation:hover {
+  left: 0;
+}
+
+.App > .email-list {
+  display: block;
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  box-sizing: border-box;
+  padding: 0;
+  user-select: none;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.App > .email-list > .email-object {
+  display: flex;
+  position: relative;
+  width: 100%;
+  height: 100px;
+  box-sizing: border-box;
+  flex-direction: column;
+  justify-content: center;
+  padding: 20px 30px;
+  margin: 0;
+  cursor: pointer;
+  background: rgb(var(--background-darker));
+  transition: all 0.1s linear;
+}
+
+.App > .email-list > .email-object[data-active], .App > .email-list > .email-object:hover {
+  background: rgb(var(--background-medium));
+}
+
+.App > .email-list > .email-object > span {
+  display: block;
+  position: relative;
+  width: 100%;
+  height: 30px;
+  line-height: 30px;
+  font-weight: 300;
+  font-size: 0.9rem;
+}
+
+.App > .email-list > .email-object > span.preview {
+  color: rgba(var(--color-primary), 0.7);
+  font-size: 0.82rem;
+}
+
+.App > .email-list > .email-object > span.date {
+  display: block;
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  color: rgba(var(--color-primary), 0.5);
+  font-size: 0.75rem;
+  width: auto;
+}
+
+.App > .email-preview {
+  display: grid;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  padding: 35px;
+  margin: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+  grid-template-rows: 50px 30px 1fr;
+}
+
+.App > .email-preview > h2 {
+  display: block;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  line-height: 50px;
+  font-weight: 500;
+  margin: 0;
+  padding: 0;
+  font-size: 1.6rem;
+}
+
+.App > .email-preview > span {
+  display: block;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  line-height: 30px;
+  font-size: 1rem;
+  color: rgba(var(--color-primary), 0.7);
+}
+
+.App > .email-preview > p {
+  display: block;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  line-height: 25px;
+  font-size: 1rem;
+  color: rgba(var(--color-primary), 0.9);
+}
+
+.App > .email-preview > .email-compose {
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgb(var(--background-dark));
+  box-sizing: border-box;
+  padding: 35px;
+  z-index: 5;
+
+  transition: all 0.1s linear;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.App[data-composing="true"] > .email-preview > .email-compose {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.App > .email-preview > .email-compose .group {
+  display: grid;
+  position: relative;
+  width: 100%;
+  grid-template-columns: 1fr 200px;
+  margin: 0 0 10px 0;
+}
+
+.App > .email-preview > .email-compose .group a {
+  display: block;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  color: rgb(var(--color));
+  background: rgba(var(--color-accent), 0.7);
+  margin: 0 0 0 10px;
+  line-height: 40px;
+  text-decoration: none;
+  cursor: pointer;
+  user-select: none;
+  transition: all 0.1s linear;
+}
+
+.App > .email-preview > .email-compose .group a:hover {
+  background: rgba(var(--color-accent), 1);
+}
+
+.App > .email-preview > .email-compose input[type="text"], .App > .email-preview > .email-compose textarea {
+  display: block;
+  position: relative;
+  width: 100%;
+  height: 40px;
+  line-height: 40px;
+  box-sizing: border-box;
+  padding: 0 20px;
+  border: none;
+  background: rgb(var(--background-darker));
+  color: rgb(var(--color-primary));
+  margin: 0;
+  outline: none;
+}
+
+.App > .email-preview > .email-compose textarea {
+  height: auto;
+  min-height: 300px;
+  max-height: 70vh;
+  resize: vertical;
+}
+
+.App > .email-preview > .email-compose input[type="text"]::before {
+  content: attr(data-label);
+  display: block;
+  width: 100px;
+  height: 40px;
+  background: red;
+}
+
+.App > .compose {
+  display: flex;
+  position: fixed;
+  bottom: 30px;
+  right: 70px;
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  color: rgb(var(--color-primary));
+  background: rgb(var(--color-accent));
+  cursor: pointer;
+  --ggs: 1.4;
+  z-index: 91;
+}
+
+.App > .compose::after {
+  content: 'Compose Email';
+  display: block;
+  position: absolute;
+  bottom: calc(100% + 5px);
+  left: 50%;
+  width: auto;
+  height: 30px;
+  line-height: 30px;
+  text-align: center;
+  transform: translateX(-50%);
+  font-size: 0.7rem;
+  background: rgb(var(--background-dark), 0.7);
+  padding: 0 10px;
+  border-radius: 3px;
+  white-space: nowrap;
+  transition: all 0.1s linear;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.App > .compose:hover::after {
+  bottom: calc(100% + 10px);
+  opacity: 1;
+  pointer-events: auto;
+}
