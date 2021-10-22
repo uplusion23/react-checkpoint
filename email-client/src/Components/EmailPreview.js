@@ -1,12 +1,20 @@
 import React from 'react';
 import EmailCompose from "./EmailCompose";
+import Envelope from "./Envelope";
 
 const EmailPreview = props => {
   return (
     <div className={'email-preview'}>
+      <span className={'backdrop'}>
+        <i className={'gg-mail'} />
+      </span>
       <h2>{(props.email && props.email.sender) ? props.email.sender : ''}</h2>
       <span>{(props.email && props.email.subject) ? props.email.subject : ''}</span>
       <p>{(props.email && props.email.message) ? props.email.message : ''}</p>
+      <div className={'default-message'}>
+        {(props.email && props.email.message) ? '' : <Envelope />}
+        {(props.email && props.email.message) ? '' : 'Please select an email to view its contents.'}
+      </div>
       <EmailCompose sendHandler={props.sendHandler}/>
     </div>
   );

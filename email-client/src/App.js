@@ -18,6 +18,10 @@ const App = () => {
     subject: "<No Subject",
     message: ""
   }) => {
+    if (data === false) {
+      setComposing(false);
+      return;
+    }
     Middleman.SendEmail(data).then(response => {
       console.log(response);
       setComposing(false);
@@ -26,7 +30,7 @@ const App = () => {
 
   useEffect(() => {
     async function getEmails() {
-      const emailsObject = await Middleman.GetEmails();
+      let emailsObject = await Middleman.GetEmails();
       setEmails(emailsObject);
     }
 

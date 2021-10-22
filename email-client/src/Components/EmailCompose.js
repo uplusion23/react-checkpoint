@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 
 const EmailCompose = props => {
 
@@ -17,7 +17,7 @@ const EmailCompose = props => {
                }}
                value={recipient}
         />
-        <a onClick={() => {
+        <a href={"#"} className={'primary'} onClick={() => {
           props.sendHandler({
             recipient,
             subject,
@@ -26,7 +26,10 @@ const EmailCompose = props => {
           setRecipient('');
           setMessage('');
           setSubject('');
-        }} > {'Send'} </a>
+        }}>
+          <i className="gg-enter"></i>
+          {'Send'}
+        </a>
       </div>
       <div className={'group'}>
         <input type={'text'}
@@ -36,6 +39,15 @@ const EmailCompose = props => {
                }}
                value={subject}
         />
+        <a href={"#"} onClick={() => {
+          setRecipient('');
+          setMessage('');
+          setSubject('');
+          props.sendHandler(false);
+        }}>
+          <i className="gg-close"></i>
+          {'Close'}
+        </a>
       </div>
       <textarea placeholder={'Enter the body of your message here'}
                 onChange={event =>{

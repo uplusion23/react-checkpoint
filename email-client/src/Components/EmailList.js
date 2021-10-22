@@ -1,11 +1,20 @@
 import EmailListObject from "./EmailListObject";
 
 const EmailList = props => {
-    console.log(props.emails)
     return(
         <div className={'email-list'}>
+            <div className={'email-list-header'}>
+              <div className={'content'}>
+                <h2>All Inboxes</h2>
+                <span>{props.emails.length} Messages</span>
+              </div>
+              <i className={'gg-feed'} />
+            </div>
+          <div className={'list'}>
             {
-                props.emails.map((email, key) =>
+                props.emails.sort((a, b) => {
+                  return new Date(b.date) - new Date(a.date);
+                }).map((email, key) =>
                      <EmailListObject
                         key = {key}
                         email = {email}
@@ -13,6 +22,7 @@ const EmailList = props => {
                     />
                 )
             }
+          </div>
         </div>
     )
 

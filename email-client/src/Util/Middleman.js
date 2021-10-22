@@ -6,7 +6,17 @@ const GetEmails = async () => {
         const emails = await axios.get(baseAddress + '/emails');
         return emails.data;
     } catch (e) {
-        throw new Error(e);
+        console.error(e);
+        return [
+            {
+                recipient: "nobody@domain.com",
+                sender: "nobody@domain.com",
+                subject: "Error fetching emails.",
+                message: e.toString(),
+                date: new Date(),
+                id: 0
+            }
+        ];
     }
 }
 
@@ -15,7 +25,10 @@ const GetEmail = async id => {
         const email = await axios.get(baseAddress + '/emails/' + id);
         return email.data;
     } catch (e) {
-        throw new Error(e);
+        console.error(e);
+        return {
+            error: e
+        }
     }
 }
 
@@ -35,7 +48,10 @@ const SendEmail = async (email = {
             return response;
         });
     } catch (e) {
-        throw new Error(e);
+        console.error(e);
+        return {
+            error: e
+        }
     }
 }
 
